@@ -1,0 +1,67 @@
+services:
+  php:
+    build: 
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: yandexmaps_reviews_integration_php
+    user: "www-data:www-data"
+    volumes:
+      - .:/var/www/yandexmaps_reviews_integration
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - yandexmaps_reviews_integration_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: yandexmaps_reviews_integration_nginx
+    ports:
+      - "${APP_PORT}:80"
+    volumes:
+      - .:/var/www/yandexmaps_reviews_integration
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - yandexmaps_reviews_integration_network
+    
+  mysql:
+    image: mysql:8.0
+    container_name: yandexmaps_reviews_integration_mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_TCP_PORT: ${DB_PORT}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    networks:
+      - yandexmaps_reviews_integration_network
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping --user=${DB_USERNAME} --password=${DB_PASSWORD} --silent" ]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 10s
+
+  node:
+    image: node:20-alpine
+    container_name: yandexmaps_reviews_integration_node
+    working_dir: /var/www/yandexmaps_reviews_integration
+    volumes:
+      - .:/var/www/yandexmaps_reviews_integration
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev"
+    networks:
+      - yandexmaps_reviews_integration_network
+
+networks:
+  yandexmaps_reviews_integration_network:
+
+volumes:
+  mysql_data:
