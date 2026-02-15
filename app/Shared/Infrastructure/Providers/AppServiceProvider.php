@@ -2,6 +2,8 @@
 
 namespace App\Shared\Infrastructure\Providers;
 
+use App\Shared\Domain\Contracts\Uuid;
+use App\Shared\Infrastructure\Services\Uuid\SymfonyUuid;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,5 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
+
+        $this->app->bind(Uuid::class, SymfonyUuid::class);
     }
 }
