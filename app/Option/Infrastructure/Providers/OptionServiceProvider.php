@@ -2,6 +2,7 @@
 
 namespace App\Option\Infrastructure\Providers;
 
+use App\Option\Application\Contracts\Validation\OptionValuesValidator;
 use App\Option\Application\Read\GetAllOptions\GetAllOptionsQuery;
 use App\Option\Application\Read\GetAllOptions\GetAllOptionsQueryHandler;
 use App\Option\Application\Read\GetOptionsByKeys\GetOptionsByKeysQuery;
@@ -10,6 +11,7 @@ use App\Option\Application\UseCases\UpdateOptions\UpdateOptionsCommand;
 use App\Option\Application\UseCases\UpdateOptions\UpdateOptionsCommandHandler;
 use App\Option\Domain\Repositories\OptionRepository;
 use App\Option\Infrastructure\Persistence\Eloquent\EloquentOptionRepository;
+use App\Option\Infrastructure\Validation\LaravelOptionValueValidator;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 
@@ -36,5 +38,7 @@ class OptionServiceProvider extends ServiceProvider
 
             UpdateOptionsCommand::class     => UpdateOptionsCommandHandler::class,
         ]);
+
+        $this->app->bind(OptionValuesValidator::class, LaravelOptionValueValidator::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Option\Infrastructure\Persistence\Eloquent;
 
+use App\Option\Domain\Entities\Option;
 use App\Option\Domain\Repositories\OptionRepository;
 use Arr;
 
@@ -26,12 +27,14 @@ class EloquentOptionRepository implements OptionRepository
         return $this->mapper->toDomainCollection($options);
     }
 
-    public function save(array $options): bool
+    public function update(array $options): array   
     {
-        $this->mapper->toEloquentCollection($options)->each(function (EloquentOptionModel $option) {
-            $this->model->updateOrCreate($option->key, $option->toArray());
+        Arr::map($options, function (Option $option) {
+            $this->model->where('key', $option->key)->update(
+                $this->mapper->toEloquent($option)->toArray()
+            );
         });
 
-        return true;
+        return $options;
     }
 }

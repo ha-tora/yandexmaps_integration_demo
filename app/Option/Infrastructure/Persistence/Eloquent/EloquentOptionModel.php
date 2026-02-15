@@ -12,6 +12,10 @@ class EloquentOptionModel extends Model
     public const CREATED_AT = null;
     public const UPDATED_AT = null;
 
+    protected $primaryKey = 'key';
+
+    public $incrementing = false;
+
     protected $table = 'options';
 
     protected $fillable = [
