@@ -22,11 +22,19 @@ class ApiResponseServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Response::macro('success', function ($data = [], int $status = 200, string $message = 'OK'): JsonResponse {
+            $value = is_array($data)
+                ? ($data['data'] ?? $data)
+                : ($data->data ?? $data);
+
+            $meta = is_array($data)
+                ? ($data['meta'] ?? null)
+                : ($data->meta ?? null);
+
             $format = [
-                'status'    => true,
-                'message'   => $message,
-                'data'      => $data
-            ];
+                'status'  => true,
+                'message' => $message,
+                'data'    => $value,
+            ] + ($meta !== null ? ['meta' => $meta] : []);
 
             return Response::json($format, $status);
         });
