@@ -16,6 +16,9 @@ restart:
 	sudo docker-compose restart $(filter-out $@,$(MAKECMDGOALS))
 
 prepare:
+	sudo docker-compose exec php mkdir -p keys
+	sudo docker-compose exec php openssl genrsa -out keys/private_rsa.key 2048
+	sudo docker-compose exec php openssl rsa -in keys/private_rsa.key -pubout -out keys/public_rsa.key
 	sudo docker-compose exec php composer install
 	sudo docker-compose exec php php artisan migrate
 	sudo docker-compose exec php php artisan optimize:clear
