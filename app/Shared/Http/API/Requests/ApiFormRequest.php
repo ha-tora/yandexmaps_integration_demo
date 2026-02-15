@@ -15,7 +15,7 @@ class ApiFormRequest extends FormRequest
 
     public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {
-        throw new BadRequestException($validator->errors()->all());
+        throw new BadRequestException($validator->errors()->toArray());
     }
 
     public function failedAuthorization()
