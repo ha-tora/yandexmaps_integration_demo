@@ -13,11 +13,7 @@ class ExceptionHandler extends \Illuminate\Foundation\Exceptions\Handler impleme
 {
     public function render($request, \Throwable $e)
     {
-        if (!($e instanceof BaseException)) {
-            return parent::render($request, $e);
-        }
-
-        if ($request->is('api/*')) {
+        if ($e instanceof BaseException && $request->is('api/*')) {
             return response()->error(
                 $e->getData(),
                 match (true) {
