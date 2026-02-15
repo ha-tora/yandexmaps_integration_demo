@@ -16,7 +16,7 @@ interface OptionRepository
 
     /**
      * @param Option[] $options
-     * @return bool
+     * @return Option[]
      */
-    public function save(array $options): bool;
+    public function update(array $options): array;
 }
