@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('value')->nullable();
             $table->string('title');
             $table->string('description');
-            $table->json('validation_rules');
+            $table->string('validation_rules');
         });
     }
 

@@ -28,7 +28,7 @@ class LaravelOptionValueValidator implements OptionValuesValidator
         });
         
         if ($validator->errors()->any()) {
-            throw new InvalidOptionValueException($validator->errors()->all());
+            throw new InvalidOptionValueException($validator->errors()->toArray());
         }
     }
 }
