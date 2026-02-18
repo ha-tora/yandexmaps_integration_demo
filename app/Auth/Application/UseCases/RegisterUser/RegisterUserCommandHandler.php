@@ -8,6 +8,7 @@ use App\Auth\Domain\Entities\Token;
 use App\Auth\Domain\Entities\User;
 use App\Auth\Domain\Repositories\TokenRepository;
 use App\Auth\Domain\Repositories\UserRepository;
+use App\Shared\Application\Contracts\Uuid;
 
 class RegisterUserCommandHandler
 {
@@ -15,12 +16,13 @@ class RegisterUserCommandHandler
         private UserRepository $userRepository,
         private TokenRepository $tokenRepository,
         private Hasher $hasher,
+        private Uuid $uuid,
     ) {}
 
     public function handle(RegisterUserCommand $command): Token 
     {
         $user = new User(
-            id: null,
+            id: $this->uuid->get(),
             name: $command->name,
             email: $command->email,
             password: $this->hasher->hash($command->password),

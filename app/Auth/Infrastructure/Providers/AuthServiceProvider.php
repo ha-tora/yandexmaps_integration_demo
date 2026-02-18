@@ -4,6 +4,8 @@ namespace App\Auth\Infrastructure\Providers;
 
 use App\Auth\Application\Read\GetAuthorizedUser\GetAuthorizedUserQuery;
 use App\Auth\Application\Read\GetAuthorizedUser\GetAuthorizedUserQueryHandler;
+use App\Auth\Application\UseCases\DecodeToken\DecodeTokenCommand;
+use App\Auth\Application\UseCases\DecodeToken\DecodeTokenCommandHandler;
 use App\Auth\Application\UseCases\LoginUser\LoginUserCommand;
 use App\Auth\Application\UseCases\LoginUser\LoginUserCommandHandler;
 use App\Auth\Application\UseCases\RegisterUser\RegisterUserCommand;
@@ -40,6 +42,7 @@ class AuthServiceProvider extends ServiceProvider
             LoginUserCommand::class         => LoginUserCommandHandler::class,
             RegisterUserCommand::class      => RegisterUserCommandHandler::class,
             GetAuthorizedUserQuery::class   => GetAuthorizedUserQueryHandler::class,
+            DecodeTokenCommand::class       => DecodeTokenCommandHandler::class
         ]);
 
         $this->app->bind(UserRepository::class, EloquentUserRepository::class);

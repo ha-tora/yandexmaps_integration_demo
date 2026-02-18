@@ -8,7 +8,7 @@ use stdClass;
 
 interface TokenRepository
 {
-    public function decode(string $token): stdClass;
+    public function decode(string $token): stdClass|null;
     
     public function create(User $user): Token;
 }

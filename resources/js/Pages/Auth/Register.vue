@@ -1,115 +1,56 @@
 <script setup lang="ts">
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-
-const form = useForm({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-});
-
-const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => {
-            form.reset('password', 'password_confirmation');
-        },
-    });
-};
+import AuthLayout from "@/Layouts/AuthLayout.vue";
+import RegisterForm from "@/Components/Auth/RegisterForm.vue";
 </script>
 
 <template>
-    <GuestLayout>
-        <Head title="Register" />
+  <AuthLayout>
+    <div class="auth-card">
+      <div class="auth-title">Регистрация</div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
+      <RegisterForm />
 
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
-
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.password_confirmation"
-                />
-            </div>
-
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    :href="route('login')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Already registered?
-                </Link>
-
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Register
-                </PrimaryButton>
-            </div>
-        </form>
-    </GuestLayout>
+      <div class="auth-footer">
+        <span class="auth-footer-text">Уже есть аккаунт?</span>
+        <a class="auth-link" href="#">Войти</a>
+      </div>
+    </div>
+  </AuthLayout>
 </template>
+
+<style lang="postcss">
+.auth-card {
+  @apply shadow-md;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 2rem;
+}
+
+.auth-title {
+  @apply font-bold text-center;
+  margin: 0.75rem 0 1.75rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: #252733;
+}
+
+.auth-footer {
+  @apply flex items-center justify-center;
+  margin-top: 0.75rem;
+  column-gap: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #252733;
+}
+
+.auth-footer-text {
+  @apply font-semibold;
+}
+
+.auth-link {
+  @apply font-semibold;
+  color: #252733;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+</style>

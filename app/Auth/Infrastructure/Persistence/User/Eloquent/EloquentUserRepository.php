@@ -4,7 +4,6 @@ namespace App\Auth\Infrastructure\Persistence\User\Eloquent;
 
 use App\Auth\Domain\Entities\User;
 use App\Auth\Domain\Repositories\UserRepository;
-use App\Shared\Domain\Contracts\Uuid;
 use Illuminate\Support\Facades\Auth;
 
 class EloquentUserRepository implements UserRepository
@@ -12,7 +11,6 @@ class EloquentUserRepository implements UserRepository
     public function __construct(
         private EloquentUserModel $model,
         private EloquentUserMapper $mapper,
-        private Uuid $uuid,
     ) {}
 
     public function getbyId(string $id): User|null
@@ -50,10 +48,6 @@ class EloquentUserRepository implements UserRepository
 
     public function save(User $user): void
     {
-        if (!$user->id) {
-            $user->id = $this->uuid->get();
-        }
-
         $this->mapper->toEloquent($user)->save();
     }
 
