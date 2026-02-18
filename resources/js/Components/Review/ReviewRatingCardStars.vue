@@ -1,0 +1,30 @@
+<script setup lang="ts">
+import StarEmpty from '@/../assets/icons/stars/star-empty.svg';
+import StarFull from '@/../assets/icons/stars/star-full.svg';
+import { defineProps } from 'vue';
+
+const props = defineProps<{rating: number}>();
+</script>
+
+<template>
+  <div class="review-rating-stars">
+    <template v-for="i in 5">
+      <div v-if="i <= rating" class="review-rating-stars-icon"><StarFull /></div>
+      <div v-else class="review-rating-stars-icon"><StarEmpty /></div>
+    </template>
+  </div>
+</template>
+
+<style lang="postcss" scoped>
+.review-rating-stars {
+  @apply inline-grid items-center;
+  grid-auto-flow: column;
+  gap: 0.5rem;
+}
+
+.review-rating-stars-icon {
+  @apply shrink-0;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+</style>
