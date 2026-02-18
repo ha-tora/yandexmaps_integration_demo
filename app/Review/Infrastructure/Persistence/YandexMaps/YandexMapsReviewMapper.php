@@ -16,6 +16,7 @@ class YandexMapsReviewMapper
                 return new Review(
                     $review['reviewId'],
                     $review['text'],
+                    $review['rating'],
                     $review['businessId'],
                     new Author(
                         $review['author']['publicId'],
