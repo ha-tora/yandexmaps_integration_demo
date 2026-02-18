@@ -2,7 +2,10 @@
 
 namespace App\Shared\Infrastructure\Providers;
 
+use App;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +25,10 @@ class ApiResponseServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Response::macro('success', function ($data = [], int $status = 200, string $message = 'OK'): JsonResponse {
+            if ($data instanceof JsonResource) {
+                $data = $data->toArray(App::get(Request::class));
+            }
+
             $value = is_array($data)
                 ? ($data['data'] ?? $data)
                 : ($data->data ?? $data);

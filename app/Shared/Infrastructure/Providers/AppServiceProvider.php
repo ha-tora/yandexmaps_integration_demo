@@ -2,7 +2,7 @@
 
 namespace App\Shared\Infrastructure\Providers;
 
-use App\Shared\Domain\Contracts\Uuid;
+use App\Shared\Application\Contracts\Uuid;
 use App\Shared\Infrastructure\Services\Uuid\SymfonyUuid;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;

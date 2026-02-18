@@ -2,7 +2,7 @@
 
 namespace App\Shared\Infrastructure\Services\Uuid;
 
-use App\Shared\Domain\Contracts\Uuid;
+use App\Shared\Application\Contracts\Uuid;
 
 class SymfonyUuid implements Uuid
 {
