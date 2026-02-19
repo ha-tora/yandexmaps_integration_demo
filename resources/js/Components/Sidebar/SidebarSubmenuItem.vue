@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps, computed } from 'vue';
-import { Link } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3';
 
 interface Props {
   name: string;
@@ -8,13 +8,15 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const isActive = computed(() => route().current(props.route));
+const isActive = computed<boolean>(() => {
+  return route().current() === props.route;
+})
 const url = computed(() => route(props.route));
 </script>
 
 <template>
   <div class="sidebar-submenu-item">
-    <Link class="sidebar-submenu-button" :class="{ active: isActive }" :href="url">
+    <Link class="sidebar-submenu-button" :active="isActive" :href="url">
       {{ name }}
     </Link>
   </div>
@@ -26,7 +28,7 @@ const url = computed(() => route(props.route));
 }
 
 .sidebar-submenu-button {
-  @apply w-full rounded-2xl transition duration-300 hover:shadow-md hover:bg-white ;
+  @apply w-full rounded-2xl;
   height: 1.5rem;
   padding-left: 3rem;
   font-size: 0.75rem;
@@ -35,7 +37,11 @@ const url = computed(() => route(props.route));
   align-items: center;
 }
 
-.sidebar-submenu-button:active {
+.sidebar-submenu-button:hover {
+  @apply transition duration-500 hover:shadow-md hover:bg-white;
+}
+
+.sidebar-submenu-button[active="true"] {
   @apply shadow-md bg-white
 }
 </style>
