@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
+import { defineProps } from "vue";
 
 const props = defineProps<{ text: string }>();
-const emit = defineEmits(["submit"]);
-
-const onSubmit = () => {
-  emit("submit");
-};
 </script>
 
 <template>
-  <button :click="onSubmit" class="auth-submit">{{ text }}</button>
+  <button class="auth-submit">{{ text }}</button>
 </template>
 
 <style lang="postcss">

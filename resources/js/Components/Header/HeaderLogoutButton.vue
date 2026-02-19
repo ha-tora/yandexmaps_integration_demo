@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import LogoutIcon from '@/../assets/icons/logout.svg';
+import { useAuth } from '@/composables/useAuth'
+
+const { logout } = useAuth();
+
+const onClick = async () => {
+  await logout();
+}
 </script>
 
 <template>
-  <button class="header-logout">
+  <button @click="onClick" class="header-logout">
     <LogoutIcon class="header-logout-icon" />
   </button>
 </template>

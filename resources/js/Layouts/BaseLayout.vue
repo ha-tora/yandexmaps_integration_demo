@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import Header from "@/Components/Header/Header.vue";
 import Sidebar from "@/Components/Sidebar/Sidebar.vue";
-import { useAuth } from '@/composables/useAuth'
-import { onMounted } from 'vue'
+import { useAuth } from "@/composables/useAuth";
+import { onMounted } from "vue";
+import { router } from "@inertiajs/vue3";
 
-const { user, login, getUser } = useAuth();
+const { user, getUser } = useAuth();
 
 onMounted(async () => {
   await getUser();
+  if (!user.value) {
+    router.visit(route("auth.login"));
+  }
 });
 </script>
 
@@ -23,9 +27,8 @@ onMounted(async () => {
   </div>
 </template>
 
-
 <style lang="postcss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 .font-sans {
   font-family: "Mulish", sans-serif;
@@ -35,7 +38,7 @@ onMounted(async () => {
 
 .layout {
   @apply flex;
-  font-family: 'Mulish', sans-serif;
+  font-family: "Mulish", sans-serif;
 }
 
 .layout-main {

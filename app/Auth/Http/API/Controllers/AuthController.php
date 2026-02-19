@@ -11,6 +11,7 @@ use App\Auth\Http\API\Resource\TokenResource;
 use App\Auth\Http\API\Resource\UserAccountResource;
 use App\Shared\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -19,6 +20,8 @@ class AuthController extends Controller
         $token = $this->dispatcher->dispatchSync(new LoginUserCommand(
             ...$request->validated()
         ));
+        
+        Cookie::queue('token', $token->token, 60);
 
         return response()->created(new TokenResource($token));
     }
@@ -28,6 +31,8 @@ class AuthController extends Controller
         $token = $this->dispatcher->dispatchSync(new RegisterUserCommand(
             ...$request->validated()
         ));
+
+        Cookie::queue('token', $token->token, 60);
 
         return response()->created(new TokenResource($token));
     }

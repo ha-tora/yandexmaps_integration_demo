@@ -12,7 +12,7 @@ import RegisterForm from "@/Components/Auth/RegisterForm.vue";
 
       <div class="auth-footer">
         <span class="auth-footer-text">Уже есть аккаунт?</span>
-        <a class="auth-link" href="#">Войти</a>
+        <a class="auth-link" :href="route('auth.login')">Войти</a>
       </div>
     </div>
   </AuthLayout>

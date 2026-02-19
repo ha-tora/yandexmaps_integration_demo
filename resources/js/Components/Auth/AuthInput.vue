@@ -10,12 +10,19 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const emit = defineEmits(['update:value']);
+
+const onUpdate = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  emit('update:value', target.value);
+}
 </script>
 
 <template>
   <label class="auth-field">
     <div class="auth-label">{{ label }}</div>
-    <input class="auth-input" :type="type" :autocomplete="autocomplete" :value="value" />
+    <input class="auth-input" :type="type" :autocomplete="autocomplete" :value="value" @input="onUpdate"/>
   </label>
 </template>
 
