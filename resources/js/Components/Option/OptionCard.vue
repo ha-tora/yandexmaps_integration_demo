@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import OptionInput from '@/Components/Option/OptionInput.vue'
 import { Option } from '@/types/option'
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
 const props = defineProps<{option: Option}>();
+
+const emit = defineEmits(['update:option']);
+
+const onUpdate = (option) => {
+  emit('update:option', option);
+}
 </script>
 
 <template>
@@ -16,7 +22,7 @@ const props = defineProps<{option: Option}>();
       {{ option.description }}
     </p>
 
-    <OptionInput :value="option.value"/>
+    <OptionInput :value="option.value" @update:value="(value) => { option.value = value }"/>
   </div>
 </template>
 

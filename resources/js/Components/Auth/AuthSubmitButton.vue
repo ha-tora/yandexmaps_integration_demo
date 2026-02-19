@@ -5,7 +5,7 @@ const props = defineProps<{ text: string }>();
 </script>
 
 <template>
-  <button class="auth-submit">{{ text }}</button>
+  <button type="submit" class="auth-submit">{{ text }}</button>
 </template>
 
 <style lang="postcss">

@@ -2,16 +2,10 @@
 import { defineEmits, defineProps } from 'vue'
 
 const props = defineProps<{loading: boolean}>();
-
-const emit = defineEmits(['click']);
-
-const onSubmit = async () => {
-    emit('click');
-}
 </script>
 
 <template>
-  <button class="option-save-button" :click="onSubmit">
+  <button type="submit" class="option-save-button">
     Сохранить
   </button>
 </template>

@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps<{value: string}>();
+
+const emit = defineEmits(['update:value']);
+
+const onUpdate = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  emit('update:value', target.value);
+}
 </script>
 
 <template>
@@ -10,6 +17,7 @@ const props = defineProps<{value: string}>();
     type="text"
     class="option-input-field"
     placeholder=""
+    @input="onUpdate"
   />
 </template>
 

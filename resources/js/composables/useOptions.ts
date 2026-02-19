@@ -23,7 +23,7 @@ export const useOptions = () => {
             }
         });
         
-        const response = await axios.put<ApiResponse<Option>>(route('api.options.update', data))
+        const response = await axios.put<ApiResponse<Option>>(route('api.options.update'), data);
         loading.value = false;
         return response.data;
     }
