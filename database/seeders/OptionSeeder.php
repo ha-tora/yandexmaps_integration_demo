@@ -16,8 +16,8 @@ class OptionSeeder extends Seeder
         EloquentOptionModel::create([
             'key' => 'business_url',
             'value' => 'https://yandex.com/maps/org/samoye_populyarnoye_cafe_tsentr/1010501395',
-            'title' => 'aaa',
-            'description' => 'bbb',
+            'title' => 'Подключить Яндекс',
+            'description' => 'Укажите ссылку на Яндекс, пример https://yandex.com/maps/org/samoye_populyarnoye_kafe/1010501395/reviews/',
             'validation_rules' => "[\"regex:/^(https:\\\\/\\\\/|)yandex\\\\.(ru|com)\\\\/maps\\\\/org\\\\/[\\\\da-zA-Z_-]+\\\\/\\\\d+.*$/u\"]"
         ]);
     }
