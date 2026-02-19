@@ -37,7 +37,6 @@ const onSubmit = async () => {
 
 <template>
   <BaseLayout>
-    {{ options.value }}
     <form @submit.prevent="onSubmit">
       <OptionCard
         v-for="option in options"

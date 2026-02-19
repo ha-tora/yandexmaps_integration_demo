@@ -7,7 +7,7 @@ const props = defineProps<{option: Option}>();
 
 const emit = defineEmits(['update:option']);
 
-const onUpdate = (option) => {
+const onUpdate = (option: Option) => {
   emit('update:option', option);
 }
 </script>
