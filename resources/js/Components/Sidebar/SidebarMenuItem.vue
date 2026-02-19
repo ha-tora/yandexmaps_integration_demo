@@ -5,7 +5,7 @@ import { defineProps, computed, defineAsyncComponent } from "vue";
 interface Props {
   id: string;
   name: string;
-  items: array<{
+  items: Array<{
     name: string;
     route: string;
   }>;
@@ -16,7 +16,7 @@ const props = defineProps<Props>();
 const icons = import.meta.glob("/resources/assets/icons/menu/*.svg", { eager: true });
 
 const icon = computed(() => {
-  return icons[`/resources/assets/icons/menu/${props.id}.svg`]?.default;
+  return icons[`/resources/assets/icons/menu/${props.id}.svg`].default ?? undefined;
 });
 </script>
 

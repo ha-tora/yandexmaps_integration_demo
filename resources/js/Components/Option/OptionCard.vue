@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import OptionInput from '@/Components/Option/OptionInput.vue'
-import { Option } from '@/types/option.d.ts'
+import { Option } from '@/types/option'
 import { defineProps } from 'vue'
 
 const props = defineProps<{option: Option}>();

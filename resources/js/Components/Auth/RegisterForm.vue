@@ -19,7 +19,7 @@ const user = reactive<{
     <AuthInput
       label="Имя"
       key="name"
-      :value="name"
+      :value="user.name"
       type=""
       autocomplete=""
     />
@@ -27,7 +27,7 @@ const user = reactive<{
     <AuthInput
       label="Email"
       key="email"
-      :value="email"
+      :value="user.email"
       type="email"
       autocomplete="email"
     />
@@ -35,7 +35,7 @@ const user = reactive<{
     <AuthInput
       label="Пароль"
       key="password"
-      :value="password"
+      :value="user.password"
       type="password"
       autocomplete="current-password"
     />

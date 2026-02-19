@@ -30,6 +30,7 @@ export const useOptions = () => {
 
     return {
         options,
+        loading,
         fetchOptions,
         updateOptions,
     }

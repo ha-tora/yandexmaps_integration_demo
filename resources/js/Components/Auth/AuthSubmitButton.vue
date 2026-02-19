@@ -10,7 +10,7 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <button :click="submit" class="auth-submit">{{ text }}</button>
+  <button :click="onSubmit" class="auth-submit">{{ text }}</button>
 </template>
 
 <style lang="postcss">

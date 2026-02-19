@@ -6,7 +6,7 @@ interface Props {
   key: string;
   value: string;
   type: string;
-  autocomplete: string | null;
+  autocomplete: string | undefined;
 }
 
 const props = defineProps<Props>();

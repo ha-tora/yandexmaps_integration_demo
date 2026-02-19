@@ -3,7 +3,7 @@ import { ref, defineProps, defineEmits } from "vue";
 import SidebarSubmenuItem from "@/Components/Sidebar/SidebarSubmenuItem.vue";
 
 interface Props {
-  items: array<{
+  items: Array<{
     name: string,
     route: string,
   }>;

@@ -24,7 +24,7 @@ onMounted(() => {
         <div class="reviews-list">
           <ReviewCard v-for="review in reviews" :key="review.id" :review="review"/>
         </div>
-        <ReviewRatingCard :rating="rating" />
+        <ReviewRatingCard v-if="rating" :rating="rating" />
       </div>
     </div>
   </BaseLayout>

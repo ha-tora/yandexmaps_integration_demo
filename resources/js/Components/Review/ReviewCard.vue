@@ -9,7 +9,7 @@ import { Link } from "@inertiajs/vue3";
 const props = defineProps<{ review: Review }>();
 
 const date = computed(() => {
-  return moment(props.review.created_at).format("DD.MM.YYYY HH:mm:ss");
+  return moment(props.review.createdAt).format("DD.MM.YYYY HH:mm:ss");
 });
 
 const text = computed(() => {

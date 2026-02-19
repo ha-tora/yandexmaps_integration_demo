@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Header from "@/Components/Header/Header.vue";
 import Sidebar from "@/Components/Sidebar/Sidebar.vue";
-import { useAuth } from '@/composables/useAuth.ts'
+import { useAuth } from '@/composables/useAuth'
 import { onMounted } from 'vue'
 
 const { user, login, getUser } = useAuth();
