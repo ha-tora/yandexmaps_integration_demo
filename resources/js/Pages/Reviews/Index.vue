@@ -3,9 +3,9 @@ import ReviewCard from "@/Components/Review/ReviewCard.vue";
 import ReviewYandexMapsButton from "@/Components/Review/ReviewYandexMapsButton.vue";
 import ReviewRatingCard from "@/Components/Review/ReviewRatingCard.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
-import { useReviews } from "@/composables/useReviews.ts";
-import { useRating } from '@/composables/useRating.ts'
-import { onMounted } from 'vue'
+import { useReviews } from "@/composables/useReviews";
+import { useRating } from "@/composables/useRating";
+import { onMounted } from "vue";
 
 const { reviews, pagination, fetchReviews, loading: reviewsLoading } = useReviews();
 const { rating, fetchRating, loading: ratingLoading } = useRating();
@@ -22,7 +22,7 @@ onMounted(() => {
       <ReviewYandexMapsButton />
       <div class="reviews-grid">
         <div class="reviews-list">
-          <ReviewCard v-for="review in reviews" :key="review.id" :review="review"/>
+          <ReviewCard v-for="review in reviews" :key="review.id" :review="review" />
         </div>
         <ReviewRatingCard v-if="rating" :rating="rating" />
       </div>
