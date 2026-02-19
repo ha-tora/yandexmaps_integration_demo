@@ -5,7 +5,9 @@ import ReviewRatingCard from "@/Components/Review/ReviewRatingCard.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { useReviews } from "@/composables/useReviews";
 import { useRating } from "@/composables/useRating";
-import { onMounted } from "vue";
+import { onMounted, defineProps } from "vue";
+
+const props = defineProps<{business_url: string}>();
 
 const { reviews, pagination, fetchReviews, loading: reviewsLoading } = useReviews();
 const { rating, fetchRating, loading: ratingLoading } = useRating();
@@ -19,7 +21,7 @@ onMounted(() => {
 <template>
   <BaseLayout>
     <div class="layout-main">
-      <ReviewYandexMapsButton />
+      <ReviewYandexMapsButton :href="business_url"/>
       <div class="reviews-grid">
         <div class="reviews-list">
           <ReviewCard v-for="review in reviews" :key="review.id" :review="review" />

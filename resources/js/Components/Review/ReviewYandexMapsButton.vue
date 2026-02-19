@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import GeoMark from "@/../assets/icons/geomark.svg";
+import { defineProps } from "vue";
+
+const props = defineProps<{href: string}>();
 </script>
 
 <template>
-  <button type="button" class="review-card-yandex-maps-button">
+  <a class="review-card-yandex-maps-button" :href="href" target="_blank">
     <div class="review-card-yandex-maps-button-icon"><GeoMark /></div>
     <div class="review-card-yandex-maps-button-text">Яндекс Карты</div>
-  </button>
+  </a>
 </template>
 
 <style lang="postcss" scoped>
